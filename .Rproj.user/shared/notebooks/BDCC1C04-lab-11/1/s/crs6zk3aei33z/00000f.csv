@@ -1,0 +1,7 @@
+"0","# Calculate 95% confidence interval"
+"0","conf_interval <- boot_df2 %>%"
+"0","  summarize(lower = quantile(stat, 0.025),"
+"0","            upper = quantile(stat, 0.975))"
+"0",""
+"0","# Print the confidence interval"
+"0","conf_interval"

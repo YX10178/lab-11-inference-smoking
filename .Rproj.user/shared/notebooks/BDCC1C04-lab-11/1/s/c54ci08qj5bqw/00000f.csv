@@ -1,0 +1,3 @@
+"0","ncbirths_clean %>%"
+"0","  group_by(habit) %>%"
+"0","  summarize(mean_weight = mean(weight))"

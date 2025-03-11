@@ -1,0 +1,7 @@
+"0","ggplot(ncbirths, aes(x = habit, y = weight, fill = habit)) +"
+"0","  geom_boxplot() +"
+"0","  labs(title = ""Birth Weight by Mother's Smoking Habit"","
+"0","       x = ""Smoking Habit"","
+"0","       y = ""Birth Weight (lbs)"") +"
+"0","  theme_minimal()"
+"0",""

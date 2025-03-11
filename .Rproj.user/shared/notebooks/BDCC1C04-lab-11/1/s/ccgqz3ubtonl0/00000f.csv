@@ -1,0 +1,4 @@
+"0","set.seed(1)"
+"0",""
+"0","data(ncbirths)"
+"0","#We have observations on 13 different variables, some categorical and some numerical. "
