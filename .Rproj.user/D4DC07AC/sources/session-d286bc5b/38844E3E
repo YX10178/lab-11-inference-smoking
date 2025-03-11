@@ -3,7 +3,7 @@
     "path": "~/Desktop/datascience/lab-11-inference-smoking/lab-11.Rmd",
     "project_path": "lab-11.Rmd",
     "type": "r_markdown",
-    "hash": "820512981",
+    "hash": "1762976406",
     "contents": "",
     "dirty": false,
     "created": 1741610204584.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "205,0",
-        "scrollLine": "195"
+        "cursorPosition": "321,58",
+        "scrollLine": "313"
     },
     "folds": "",
-    "lastKnownWriteTime": 1741665375,
+    "lastKnownWriteTime": 1741710705,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1741665375364,
+    "last_content_update": 1741710705442,
     "read_only": false,
     "read_only_alternatives": []
 }

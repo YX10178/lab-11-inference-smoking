@@ -209,12 +209,118 @@ conf_interval
 ```
 
 ### 11
+```{r}
+# Filter for younger and mature mothers while dropping NA values
+younger_moms <- ncbirths %>%
+  filter(mature == "younger mom") %>%
+  drop_na(mage)
 
+mature_moms <- ncbirths %>%
+  filter(mature == "mature mom") %>%
+  drop_na(mage)
+
+
+summary (younger_moms)
+summary (mature_moms)
+
+# in the younger mom group, min = 13, max = 34 
+# in the mature mom group, min = 35, max = 50 
+```
 
 ### 12
+Null Hypothesis (H₀): The proportion of low birth weight babies is the same for mature and younger mothers.
+Alternative Hypothesis (Hₐ): The proportion of low birth weight babies is higher for mature mothers.
+This is a one-tailed test
+Each birth is an independent observation.
+Sample Size is large. 
+```{r}
+table(ncbirths$mature, ncbirths$lowbirthweight)
+```
+```{r}
+set.seed(123456)
+
+ncbirths_clean2 <- ncbirths %>%
+  drop_na(mature, weight)
+
+# Generate 10000 bootstrap samples
+boot_prop <- ncbirths_clean2 %>%
+  specify(
+    response = lowbirthweight, 
+    explanatory = mature, 
+    success = "low"  # Focus on "low" birth weight
+  ) %>%  
+  generate(reps = 10000, type = "bootstrap") %>% 
+  calculate(
+    stat = "diff in props", 
+    order = c("younger mom", "mature mom")  )
+    
+
+obs_diff <- ncbirths_clean2 %>%
+  specify(
+    response = lowbirthweight, 
+    explanatory = mature, 
+    success = "low"
+  ) %>% 
+  calculate(
+    stat = "diff in props", 
+    order = c("younger mom", "mature mom")
+  ) %>% 
+  pull(stat)
+
+ggplot(boot_prop, aes(x = stat)) +
+  geom_histogram(binwidth = 0.02, fill = "skyblue", color = "black") +
+  geom_vline(xintercept = obs_diff, color = "red", linetype = "dashed") +
+  labs(
+    title = "Bootstrap Distribution of Difference in Proportions",
+    x = "Proportion Difference",
+    y = "Count"
+  )
+
+boot_prop %>% 
+  summarize(lower = quantile(stat, 0.05)) 
+
+null_dist <- ncbirths_clean2 %>%
+  specify(
+    response = lowbirthweight, 
+    explanatory = mature, 
+    success = "low"
+  ) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(
+    stat = "diff in props", 
+    order = c("younger mom", "mature mom")
+  )
+
+ggplot(null_dist, aes(x = stat)) +
+  geom_histogram(binwidth = 0.02, fill = "skyblue", color = "black") +
+  geom_vline(xintercept = obs_diff, color = "red", linetype = "dashed") +
+  labs(
+    title = "Null Distribution of Difference in Proportions",
+    x = "Proportion Difference",
+    y = "Count"
+  )
+
+p_value <- null_dist %>%
+  filter(stat >= obs_diff) %>%  # Extreme values under H₁
+  summarize(p_value = n() / nrow(null_dist)) %>%
+  pull(p_value)
+
+# Print p-value
+p_value
+
+#p-value = 0.8617> 0.05, fail to reject the null hypothesis.
+```
 
 
 ### 13
+
+```{r}
+boot_prop %>% 
+  summarize(lower = quantile(stat, 0.05)) 
+
+# with 95% confidence, the true difference in proportions is at least -0.082.
+```
 
 
 
