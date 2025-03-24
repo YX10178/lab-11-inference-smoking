@@ -7,7 +7,7 @@
 "0","# Print p-value"
 "0","p_value"
 "1","[1]"
-"1"," 0.8617"
+"1"," 0.2074"
 "1","
 "
 "0","#p-value = 0.8617> 0.05, fail to reject the null hypothesis."

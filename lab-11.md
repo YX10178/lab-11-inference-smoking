@@ -382,11 +382,11 @@ summary (mature_moms)
 
 ### 12
 
-Null Hypothesis (H₀): The proportion of low birth weight babies is the
-same for mature and younger mothers. Alternative Hypothesis (Hₐ): The
-proportion of low birth weight babies is higher for mature mothers. This
-is a one-tailed test Each birth is an independent observation. Sample
-Size is large.
+Null Hypothesis (H₀): The proportion of low birth weight babies is not
+higher for mature mothers. Alternative Hypothesis (Hₐ): The proportion
+of low birth weight babies is higher for mature mothers. This is a
+one-tailed test Each birth is an independent observation. Sample Size is
+large.
 
 ``` r
 table(ncbirths$mature, ncbirths$lowbirthweight)
@@ -413,7 +413,7 @@ boot_prop <- ncbirths_clean2 %>%
   generate(reps = 10000, type = "bootstrap") %>% 
   calculate(
     stat = "diff in props", 
-    order = c("younger mom", "mature mom")  )
+    order = c("mature mom","younger mom")  )
     
 
 obs_diff <- ncbirths_clean2 %>%
@@ -424,7 +424,7 @@ obs_diff <- ncbirths_clean2 %>%
   ) %>% 
   calculate(
     stat = "diff in props", 
-    order = c("younger mom", "mature mom")
+    order = c("mature mom","younger mom")
   ) %>% 
   pull(stat)
 
@@ -448,7 +448,7 @@ boot_prop %>%
     ## # A tibble: 1 × 1
     ##     lower
     ##     <dbl>
-    ## 1 -0.0823
+    ## 1 -0.0227
 
 ``` r
 null_dist <- ncbirths_clean2 %>%
@@ -461,7 +461,7 @@ null_dist <- ncbirths_clean2 %>%
   generate(reps = 10000, type = "permute") %>%
   calculate(
     stat = "diff in props", 
-    order = c("younger mom", "mature mom")
+    order = c("mature mom","younger mom")
   )
 
 ggplot(null_dist, aes(x = stat)) +
@@ -486,10 +486,10 @@ p_value <- null_dist %>%
 p_value
 ```
 
-    ## [1] 0.8617
+    ## [1] 0.2074
 
 ``` r
-#p-value = 0.8617> 0.05, fail to reject the null hypothesis.
+#p-value = 0.2074> 0.05, fail to reject the null hypothesis.
 ```
 
 ### 13
@@ -502,8 +502,8 @@ boot_prop %>%
     ## # A tibble: 1 × 1
     ##     lower
     ##     <dbl>
-    ## 1 -0.0823
+    ## 1 -0.0227
 
 ``` r
-# with 95% confidence, the true difference in proportions is at least -0.082.
+# with 95% confidence, the true difference in proportions is at least -0.02265745   .
 ```

@@ -10,4 +10,4 @@
 "1"," 0.0263"
 "1","
 "
-"0","#p-value = 6e−04=0.0006 < 0.05, reject the null hypothesis, birth weight has changed significantly since 1995."
+"0","#p-value = 0.0263 < 0.05, reject the null hypothesis, meaning there is a significant difference in birth weights between smokers and nonsmokers."

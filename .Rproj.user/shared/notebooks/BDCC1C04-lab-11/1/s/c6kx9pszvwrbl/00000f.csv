@@ -1,3 +1,2 @@
-"0",""
 "0","boot_prop %>% "
 "0","  summarize(lower = quantile(stat, 0.05)) "

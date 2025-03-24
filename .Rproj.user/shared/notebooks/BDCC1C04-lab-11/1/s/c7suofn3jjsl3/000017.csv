@@ -9,7 +9,7 @@
 "0","  generate(reps = 10000, type = ""permute"") %>%"
 "0","  calculate("
 "0","    stat = ""diff in props"", "
-"0","    order = c(""younger mom"", ""mature mom"")"
+"0","    order = c(""mature mom"",""younger mom"")"
 "0","  )"
 "0",""
 "0","ggplot(null_dist, aes(x = stat)) +"
